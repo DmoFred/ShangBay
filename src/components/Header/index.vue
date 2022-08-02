@@ -5,16 +5,22 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p>
+          <p v-if="!userName">
+            <!-- 没有用户名，未登录 -->
             <span>请</span>
             <!-- 声明式导航：务必加 to 属性 -->
             <router-link to="/login">登录</router-link>
-            <router-link to="/register">免费注册</router-link>
+            <router-link class="register" to="/register">免费注册</router-link>
+          </p>
+          <p v-else>
+            <!-- 已登录 -->
+            <a>{{userName}}</a>
+            <a class="register" @click="Logout">退出登录</a>
           </p>
         </div>
         <div class="typeList">
-          <a href="###">我的订单</a>
-          <a href="###">我的购物车</a>
+          <router-link to="/center/myorder">我的订单</router-link>
+          <router-link to="/shopcart">我的购物车</router-link>
           <!-- <a href="###">我的尚品汇</a> -->
           <router-link to="/home">我的尚品汇</router-link>
           <a href="###">尚品汇会员</a>
@@ -74,16 +80,38 @@ export default {
       // 如果有query参数也顺带过去
       let loction = { name: 'search', params: { keyword: this.keyword || undefined } };
       loction.query = this.$route.query;
-      this.$router.push({ loction })
+      this.$router.push(loction)
       // params: { keyword: this.keyword },
       // query: { k: this.keyword.toUpperCase()}
     } */
-  },  // this.$router.push({ path: '/search', params: { keyword: this.keyword }, query: { k: this.keyword.toUpperCase() } }) //path不可以结合params参数一起使用 可以和name一起使用
+    // this.$router.push({ path: '/search', params: { keyword: this.keyword }, query: { k: this.keyword.toUpperCase() } }) //path不可以结合params参数一起使用 可以和name一起使用
+    // 退出登录  需要做哪些事情？ 1发请求通知服务器退出登录 清除数据 token userInfo
+    async Logout () {
+      // alert(123)
+      try {
+        // 如果退出成功
+        await this.$store.dispatch('userLogout')
+        // 返回登录页
+        this.$router.push('/login')
+      } catch (error) {
+        alert(error.message)
+      }
+    },
+
+  },
   mounted () {
     // 通知全局事件总线清除关键字 由pages/Search组件提出的clear关键字   this.$bus.$emit('clear')
     this.$bus.$on('clear', () => {
       this.keyword = ''
-    })
+    });
+    // 发起token信息的请求
+    this.$store.dispatch('getUserInfo')
+  },
+  computed: {
+    // 用户名信息
+    userName () {
+      return this.$store.state.user.userInfo.name
+    }
   }
 }
 
@@ -106,14 +134,17 @@ export default {
 
         p {
           float: left;
-          margin-right: 10px;
+          margin-right: 5px;
           a {
             margin: 0 5px;
+            &:hover {
+              color: #ea4a36;
+            }
           }
 
           .register {
             border-left: 1px solid #b3aeae;
-            padding: 0 5px;
+            padding: 0 10px;
             margin-left: 5px;
           }
         }
@@ -124,6 +155,10 @@ export default {
 
         a {
           padding: 0 10px;
+
+          &:hover {
+            color: #ea4a36;
+          }
 
           & + a {
             border-left: 1px solid #b3aeae;

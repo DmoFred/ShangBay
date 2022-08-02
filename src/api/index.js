@@ -36,3 +36,22 @@ export const reqDeleteCart = (skuId) => requests.delete(`/cart/deleteCart/${skuI
 
 //修改某一个商品的勾选的状态
 export const reqUpdateChecked = (skuId, isChecked) => requests.get(`/cart/checkCart/${skuId}/${isChecked}`);
+
+// 获取验证码 /user/passport/sendCode/{phone} get方式
+export const reqAuthCode = (phone) => requests.get(`/user/passport/sendCode/${phone}`)
+
+// 注册 /user/passport/register  带的参数phone password code  post方式
+export const reqRegister = (data) => requests.post(`/user/passport/register`, data)
+
+// 登录 /user/passport/login  post请求   params：phone password
+export const reqLogin = (data) => requests.post(`/user/passport/login`, data)
+
+// 获取用户登录信息【需要带着用户token去向服务器发请求要用户信息】，用户登录只保存用户的token token校验 
+// http://182.92.128.115/api/user/passport/auth/getUserInfo 
+export const reqUserInfo = () => requests.get(`/user/passport/auth/getUserInfo`)
+
+// 退出登录   /user/passport/logout  get方式
+export const reqLogout = () => requests.get(`/user/passport/logout`)
+
+
+// /user/userAddress/auth/findUserAddressList    获取用户地址信息  get方式

@@ -23,7 +23,10 @@ requests.interceptors.request.use((config) => {
     // 请求头添加一个字段（userTempId）：和后端老师商量
     config.headers.userTempId = store.state.detail.uuidToken
   }
-
+  // 判断是否有token带给服务器
+  if (store.state.user.token) {
+    config.headers.token = store.state.user.token
+  }
   // 进度条开始动
   nprogress.start()
   // config:配置对象，对象里面有一个属性很重要，header请求头
@@ -37,11 +40,10 @@ requests.interceptors.response.use((res) => {
   return res.data;
 }, (err) => {
   //温馨提示:某一天发请求,请求失败,请求失败的信息打印出来
-  alert(err.message);
+  console.log(err.message);
   //终止Promise链
-  return new Promise();
+  return new Promise.reject(new Error('fail'));
 });
-
 
 // 对外暴露
 export default requests

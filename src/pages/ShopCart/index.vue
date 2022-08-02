@@ -279,7 +279,7 @@ export default {
     }
 
     .cart-body {
-      margin: 15px 0;
+      margin: 12px 0;
       border: 1px solid #ddd;
 
       .cart-list {
@@ -383,6 +383,7 @@ export default {
   }
 
   .cart-tool {
+    margin-bottom: 17px;
     overflow: hidden;
     border: 1px solid #ddd;
 
@@ -447,12 +448,16 @@ export default {
           width: 96px;
           height: 52px;
           line-height: 52px;
-          color: #fff;
+          color: green;
           text-align: center;
           font-size: 18px;
           font-family: 'Microsoft YaHei';
-          background: #e1251b;
+          background: #fff;
           overflow: hidden;
+          &:hover {
+            background: #e1251b;
+            color: #fff !important;
+          }
         }
       }
     }

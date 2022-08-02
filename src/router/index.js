@@ -4,7 +4,8 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 // 使用插件
 Vue.use(VueRouter)
-
+// 引入store
+import store from '@/store'
 
 //备份VueRouter.prototype原有的push|replace方法
 let originPush = VueRouter.prototype.push;
@@ -25,11 +26,13 @@ VueRouter.prototype.push = function (location, resolve, reject) {
 }
 //重写VueRouter.prototype.replace方法
 VueRouter.prototype.replace = function (location, resolve, reject) {
-  (resolve && reject) ? originReplace.call(this, location, resolve, reject) : originReplace.call(this, location, () => { }, () => { });
+  (resolve && reject)
+    ? originReplace.call(this, location, resolve, reject)
+    : originReplace.call(this, location, () => { }, () => { });
 }
 
 // 配置路由
-export default new VueRouter({
+const router = new VueRouter({
   // 配置路由
   routes,
   // 路由跳转detail页面滚动条处在最上方
@@ -38,3 +41,60 @@ export default new VueRouter({
     return { y: 0 }
   },
 })
+
+// 全局守卫：前置守卫（在路由跳转之间进行判断）
+router.beforeEach(async (to, from, next) => {
+  // to：可以获取到你要跳转到哪个路由信息
+  // console.log(to)
+  // from：可以获取到你从哪个路由来的信息
+  // next：放行函数     next()放行
+  // next('/login')  next('path') 放行到指定路由   next(false) 取消当前的导航，返回到从哪跳转--打哪来回哪去
+  // 为了测试全都放行
+  // next()
+  // console.log(store);
+  // 用户登录了，才会有token，未登录一定不会有token
+  let token = store.state.user.token
+  // 用户信息
+  let name = store.state.user.userInfo
+  // 已登录
+  if (token) {
+    // 如果用户已登录 要去login页面 做判断
+    if (to.path == '/login') {
+      // next('/home')  or  next('/')
+      next('/home')
+      // console.log(111)
+      // 登录了，去的可能不是login|home|search|detail|shopcart
+    } else {
+      // next()
+      // console.log(678);
+      // 如果用户名已有
+      if (name) {
+        next()
+        // console.log(222)
+      } else {
+        // 没有用户信息,派发action让仓库存储用户信息再跳转
+        try {
+          // 获取用户信息，派发action让仓存储用户信息成功
+          await store.dispatch('getUserInfo')
+          next()
+          // console.log(333)
+        } catch (error) {
+          // token失效 获取不到用户信息，重新登录
+          // 清除token
+          await store.dispatch('userLogout')
+          next('/login')
+          // console.log(666)
+        }
+      }
+    }
+    // 未登录
+  } else {
+    next()
+    // console.log(888)
+  }
+
+})
+
+
+
+export default router

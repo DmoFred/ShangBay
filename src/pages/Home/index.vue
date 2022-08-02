@@ -25,7 +25,9 @@ export default {
   components: { ListContainer, Recommend, Rank, Like, Floor, Brand },
   mounted () {
     // 派发actions,获取floor组件的数据
-    this.$store.dispatch('getFloorList')
+    this.$store.dispatch('getFloorList');
+
+    this.$store.dispatch('getUserInfo')
   },
   computed: {
     ...mapState({
