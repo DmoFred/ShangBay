@@ -6,6 +6,8 @@ import Register from '@/pages/Register'
 import Detail from '@/pages/Detail'
 import AddCartSuccess from '@/pages/AddCartSuccess'
 import ShopCart from '@/pages/ShopCart'
+import Trade from '@/pages/Trade'
+
 
 // 配置路由信息
 export default [
@@ -34,6 +36,12 @@ export default [
   {
     path: '/shopcart',
     component: ShopCart,
+    //路由元信息,控制当前路由是否需要Footer组件
+    meta: { show: true },
+  },
+  {
+    path: '/trade',
+    component: Trade,
     //路由元信息,控制当前路由是否需要Footer组件
     meta: { show: true },
   },

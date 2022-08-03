@@ -19,7 +19,7 @@
           </p>
         </div>
         <div class="typeList">
-          <router-link to="/center/myorder">我的订单</router-link>
+          <router-link class="redColor" to="/center/myorder">我的订单</router-link>
           <router-link to="/shopcart">我的购物车</router-link>
           <!-- <a href="###">我的尚品汇</a> -->
           <router-link to="/home">我的尚品汇</router-link>
@@ -104,8 +104,6 @@ export default {
     this.$bus.$on('clear', () => {
       this.keyword = ''
     });
-    // 发起token信息的请求
-    this.$store.dispatch('getUserInfo')
   },
   computed: {
     // 用户名信息
@@ -164,6 +162,11 @@ export default {
             border-left: 1px solid #b3aeae;
           }
         }
+      }
+    }
+    .redColor {
+      &:hover {
+        color: #ea4a36 !important;
       }
     }
   }

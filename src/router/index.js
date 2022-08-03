@@ -55,7 +55,7 @@ router.beforeEach(async (to, from, next) => {
   // 用户登录了，才会有token，未登录一定不会有token
   let token = store.state.user.token
   // 用户信息
-  let name = store.state.user.userInfo
+  let name = store.state.user.userInfo.name
   // 已登录
   if (token) {
     // 如果用户已登录 要去login页面 做判断

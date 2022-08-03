@@ -245,8 +245,8 @@ export default {
           }
 
           .register:hover {
-            color: #4cb9fc;
-            text-decoration: underline;
+            color: green;
+            text-decoration: none;
           }
         }
       }
