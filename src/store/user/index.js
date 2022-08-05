@@ -23,7 +23,6 @@ const mutations = {
         state.userInfo = {}
         //删除token
         localStorage.removeItem('TOKEN')
-        state.cartList = []
     }
 }
 const actions = {

@@ -13,12 +13,7 @@
       <div class="cart-body">
         <ul class="cart-list" v-for="(cart, index) in cartInfoList " :key="cart.id">
           <li class="cart-list-con1">
-            <input
-              type="checkbox"
-              name="chk_list"
-              :checked="cart.isChecked"
-              @change="changeChecked(cart, $event)"
-            />
+            <input type="checkbox" name="chk_list" :checked="cart.isChecked" @change="changeChecked(cart, $event)" />
           </li>
           <li class="cart-list-con2">
             <img :src="cart.imgUrl" />
@@ -29,14 +24,8 @@
           </li>
           <li class="cart-list-con5">
             <a class="mins" @click="minusNum(cart)">-</a>
-            <input
-              autocomplete="off"
-              type="text"
-              minnum="1"
-              class="itxt"
-              :value="cart.skuNum"
-              @click="changeNum(cart, $event)"
-            />
+            <input autocomplete="off" type="text" minnum="1" class="itxt" :value="cart.skuNum"
+              @click="changeNum(cart, $event)" />
             <a class="plus" @click="addNum(cart)">+</a>
           </li>
           <li class="cart-list-con6">
@@ -52,12 +41,8 @@
     </div>
     <div class="cart-tool">
       <div class="select-all">
-        <input
-          class="chooseAll"
-          type="checkbox"
-          @change="updateAllChecked($event)"
-          :checked="isCartChecked && cartInfoList.length > 0"
-        />
+        <input class="chooseAll" type="checkbox" @change="updateAllChecked($event)"
+          :checked="isCartChecked && cartInfoList.length > 0" />
         <span>全选</span>
       </div>
       <div class="option">
@@ -241,7 +226,7 @@ export default {
       padding: 10px;
       overflow: hidden;
 
-      & > div {
+      &>div {
         float: left;
       }
 
@@ -287,7 +272,7 @@ export default {
         border-bottom: 1px solid #ddd;
         overflow: hidden;
 
-        & > li {
+        &>li {
           float: left;
         }
 
@@ -454,6 +439,7 @@ export default {
           font-family: 'Microsoft YaHei';
           background: #fff;
           overflow: hidden;
+
           &:hover {
             background: #e1251b;
             color: #fff !important;

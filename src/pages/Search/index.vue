@@ -13,18 +13,24 @@
           </ul>
           <ul class="fl sui-tag">
             <!-- 分类的面包屑  比如点击手机  -->
-            <li class="with-x" v-show="searchParams.categoryName">{{ searchParams.categoryName }}<i
-                @click="removeCategoryName">x</i></li>
+            <li class="with-x" v-show="searchParams.categoryName">
+              {{ searchParams.categoryName }}
+              <i @click="removeCategoryName">x</i>
+            </li>
             <!-- 关键字的面包屑 输入Apple -->
-            <li class="with-x" v-show="searchParams.keyword">{{ searchParams.keyword }}<i @click="removeKeyword">x</i>
+            <li class="with-x" v-show="searchParams.keyword">
+              {{ searchParams.keyword }}
+              <i @click="removeKeyword">x</i>
             </li>
             <!-- 品牌的面包屑 点击参数配置上面的 品牌 会同样显示在面包屑上                        split是数组切割 将字符串分割为数组 splice不行 报错not a function   -->
-            <li class="with-x" v-show="searchParams.trademark">{{ searchParams.trademark.split(':')[1] }}<i
-                @click="removeTradeMark">x</i>
+            <li class="with-x" v-show="searchParams.trademark">
+              {{ searchParams.trademark.split(':')[1] }}
+              <i @click="removeTradeMark">x</i>
             </li>
             <!-- 平台的售卖属性值展示面包屑 -->
             <li class="with-x" v-for="(attrValue, index) in searchParams.props" :key="index">
-              {{ attrValue.split(':')[1] }}<i @click="removeAttr(index)">x</i>
+              {{ attrValue.split(':')[1] }}
+              <i @click="removeAttr(index)">x</i>
             </li>
           </ul>
         </div>
@@ -39,13 +45,23 @@
               <!-- 排序的结构 -->
               <ul class="sui-nav">
                 <li :class="{ active: isOne }" @click="change('1')">
-                  <a>综合<span v-show="isOne" class="iconfont"
-                      :class="{ 'icon-xiangshangjiantoucuxiao': isAsc, 'icon-xiangxiajiantoucuxiao': !isAsc }"></span>
+                  <a>
+                    综合
+                    <span
+                      v-show="isOne"
+                      class="iconfont"
+                      :class="{ 'icon-xiangshangjiantoucuxiao': isAsc, 'icon-xiangxiajiantoucuxiao': !isAsc }"
+                    ></span>
                   </a>
                 </li>
                 <li :class="{ active: isTwo }" @click="change('2')">
-                  <a>价格<span v-show="isTwo" class="iconfont"
-                      :class="{ 'icon-xiangshangjiantoucuxiao': isAsc, 'icon-xiangxiajiantoucuxiao': !isAsc }"></span>
+                  <a>
+                    价格
+                    <span
+                      v-show="isTwo"
+                      class="iconfont"
+                      :class="{ 'icon-xiangshangjiantoucuxiao': isAsc, 'icon-xiangxiajiantoucuxiao': !isAsc }"
+                    ></span>
                   </a>
                 </li>
               </ul>
@@ -69,25 +85,42 @@
                     </strong>
                   </div>
                   <div class="attr">
-                    <a target="_blank" href="item.html" title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】">{{ good.title
-                    }}</a>
+                    <a
+                      target="_blank"
+                      href="item.html"
+                      title="促销信息，下单即赠送三个月CIBN视频会员卡！【小米电视新品4A 58 火爆预约中】"
+                    >
+                      {{ good.title
+                      }}
+                    </a>
                   </div>
                   <div class="commit">
-                    <i class="command">已有<span>2000</span>人评价</i>
+                    <i class="command">
+                      已有
+                      <span>2000</span>人评价
+                    </i>
                   </div>
                   <div class="operate">
-                    <a href="success-cart.html" target="_blank" class="sui-btn btn-bordered btn-danger">加入购物车</a>
+                    <a
+                      href="success-cart.html"
+                      target="_blank"
+                      class="sui-btn btn-bordered btn-danger"
+                    >加入购物车</a>
                     <a href="javascript:void(0);" class="sui-btn btn-bordered">收藏</a>
                   </div>
                 </div>
               </li>
-
             </ul>
           </div>
           <!-- 分页器   :pageNo='1'{默认处在第一页  :pageSize='5'}每页展示多少个商品  :total='100' 共100条数据  连续页码分数-->
           <div class="fr page">
-            <Pagination :total="total" :pageSize="searchParams.pageSize" :pageNo="searchParams.pageNo" :pagerCount="5"
-              @currentPage="currentPage"></Pagination>
+            <Pagination
+              :total="total"
+              :pageSize="searchParams.pageSize"
+              :pageNo="searchParams.pageNo"
+              :pagerCount="5"
+              @currentPage="currentPage"
+            />
           </div>
         </div>
       </div>

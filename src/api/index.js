@@ -59,3 +59,15 @@ export const reqAddressInfo = () => requests.get(`/user/userAddress/auth/findUse
 // 获取商品清单 /order/auth/trade get方式
 export const reqOrderInfo = () => requests.get(`/order/auth/trade`)
 
+
+// 提交订单的接口  /order/auth/submitOrder?tradeNo={tradeNo}   post方式
+export const reqSubmitOrder = (tradeNo, data) => requests.post(`/order/auth/submitOrder?tradeNo=${tradeNo}`, data)
+
+// 获取订单支付信息 /payment/weixin/createNative/{orderId}    get
+export const reqPayInfo = (orderId) => requests.get(`/payment/weixin/createNative/${orderId}`)
+
+// 获取支付订单状态  /payment/weixin/queryPayStatus/{orderId}  get
+export const reqPayStatus = (orderId) => requests.get(`/payment/weixin/queryPayStatus/${orderId}`)
+
+// 请求个人中心订单数据：/order/auth/{page}/{limit}   get   params：page页码，limit分页数
+export const reqCenterOrder = (page, limit) => requests.get(`/order/auth/${page}/${limit}`)

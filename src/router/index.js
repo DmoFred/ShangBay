@@ -87,14 +87,33 @@ router.beforeEach(async (to, from, next) => {
         }
       }
     }
-    // 未登录
+    // 未登录  /* 暂时全部放行，将来回来处理 */
   } else {
-    next()
+    // next()
     // console.log(888)
+    // 未登录：不能去交易、支付相关页面 pay|paySuccess 及个人中心
+    // 未登录去上面路由---提醒登录
+    let toPath = to.path
+    if (toPath.indexOf('/trade') === 0 ||
+      // startsWith 判断当前字符串是否以另外一个给定的子字符串开头，并根据判断结果返回 true 或 false
+      toPath.startsWith('/pay') ||
+      toPath.startsWith('/center')) {
+      // 判断是否用户名是否存在，存在即全放行
+      if (store.state.user.userInfo.name) {
+        next();
+      } else {
+        // 如果想去上面的路由弹出窗 '请先登录' 
+        alert('请先登录');
+        // 登录成功后跳转之前想去(然后需要登录的)页面 | 重定向之前想去的页面
+        next('/login?redirect=' + toPath);
+      }
+      // 其他全部放行 以游客身份
+    } else {
+      next()
+    }
   }
-
 })
+// console.log(store); 测试登录状态是否存在store里的state里的user里的userInfo里的name
 
-
-
+// 对外暴露路由
 export default router

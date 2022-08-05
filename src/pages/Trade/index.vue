@@ -87,7 +87,7 @@
 			</div>
 		</div>
 		<div class="sub clearFix">
-			<router-link class="subBtn" to="/pay">提交订单</router-link>
+			<a class="subBtn" @click="submitOrder">提交订单</a>
 		</div>
 	</div>
 </template>
@@ -99,7 +99,9 @@ export default {
 	data () {
 		return {
 			// 收集卖家的留言信息
-			msg: ''
+			msg: '',
+			// 订单号
+			orderId: ''
 		}
 	},
 	// 生命周期函数 组件页面挂载完毕 钩子函数
@@ -124,6 +126,32 @@ export default {
 			// 全部的isDefault为0
 			addressInfo.forEach(item => item.isDefault = 0)
 			address.isDefault = 1;
+		},
+		// 提交订单
+		async submitOrder () {
+			// console.log(this.$api);
+			// 交易编码
+			let { tradeNo } = this.orderInfo;
+			let data = {
+				"consignee": this.userDefaultAddress.consignee,   	  // 最终收件人的名字
+				"consigneeTel": this.userDefaultAddress.phoneNum,	  // 收件人的手机号
+				"deliveryAddress": this.userDefaultAddress.fullAddress, // 地址
+				"paymentWay": "ONLINE",  // 支付方式
+				"orderComment": this.msg,	//买家的留言信息
+				"orderDetailList": this.orderInfo.detailArrayList  // 商品清单
+			}
+			// 需要带参数
+			let result = await this.$api.reqSubmitOrder(tradeNo, data)
+			// console.log(result)
+			// 提交订单成功
+			if (result.code == 200) {
+				this.orderId = result.data
+				// 路由跳转 + 路由传参
+				this.$router.push('/pay?orderId=' + this.orderId)
+				// 提交订单失败
+			} else {
+				alert('提交订单失败！请联系管理员' + result.data)
+			}
 		},
 	}
 }
@@ -387,6 +415,10 @@ export default {
 			text-align: center;
 			color: #fff;
 			background-color: #e1251b;
+
+			&:hover {
+				color: #ddd;
+			}
 		}
 	}
 }
