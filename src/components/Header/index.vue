@@ -9,7 +9,7 @@
             <!-- 没有用户名，未登录 -->
             <span>请</span>
             <!-- 声明式导航：务必加 to 属性 -->
-            <router-link to="/login">登录</router-link>
+            <router-link class="login" to="/login">登录</router-link>
             <router-link class="register" to="/register">免费注册</router-link>
           </p>
           <p v-else>
@@ -129,21 +129,24 @@ export default {
 
       .loginList {
         float: left;
+        .login {
+          &:hover {
+            color: #ea4a36;
+          }
+        }
 
         p {
           float: left;
           margin-right: 5px;
+
           a {
-            margin: 0 5px;
-            &:hover {
-              color: #ea4a36;
-            }
+            margin: 0 2px;
           }
 
           .register {
-            border-left: 1px solid #b3aeae;
             padding: 0 10px;
             margin-left: 5px;
+            color: #ea4a36;
           }
         }
       }

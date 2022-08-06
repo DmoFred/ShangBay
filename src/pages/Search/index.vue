@@ -75,7 +75,7 @@
                   <div class="p-img">
                     <!-- 详情页 -->
                     <router-link :to="`/detail/${good.id}`">
-                      <img :src="good.defaultImg" />
+                      <img v-lazy="good.defaultImg" style="width:215px;height:215px;"/>
                     </router-link>
                   </div>
                   <div class="price">

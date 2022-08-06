@@ -31,6 +31,25 @@ console.log(reqGetSearchInfo({}));  */
 import * as api from '@/api'
 // console.log(api);
 
+import luffy from '@/assets/luffy.gif'
+// 引入图片懒加载插件
+import VueLazyload from 'vue-lazyload'
+// 注册插件
+Vue.use(VueLazyload, {
+  // 懒加载默认的图片
+  loading: luffy
+})
+
+/* // 引入自定义插件
+import myPlugin from '@/plugins/myPlugin'
+Vue.use(myPlugin, {
+  name: 'upper'
+})*/
+
+// 引入表单校验插件
+import '@/plugins/validate'
+
+// 关闭Vue的生产提示
 Vue.config.productionTip = false
 
 new Vue({
