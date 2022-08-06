@@ -1,24 +1,19 @@
-# app
+# ShangBay
 
-## Project setup
-```
-yarn 
-```
+### 先安装依赖
 
-### Compiles and hot-reloads for development
 ```
-yarn serve
+(Windows电脑输入) npm install  || （Mac电脑输入）sudo npm install
 ```
 
-### Compiles and minifies for production
+### 再启动项目
+
 ```
-yarn build
+npm run serve
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
+### 打包生成 dist
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
+npm run build
+```

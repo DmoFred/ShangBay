@@ -31,7 +31,7 @@ console.log(reqGetSearchInfo({}));  */
 import * as api from '@/api'
 // console.log(api);
 
-import luffy from '@/assets/luffy.gif'
+import luffy from '@/assets/images/luffy.gif'
 // 引入图片懒加载插件
 import VueLazyload from 'vue-lazyload'
 // 注册插件

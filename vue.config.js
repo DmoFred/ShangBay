@@ -1,4 +1,5 @@
 module.exports = {
+  // 为了打包后去除map文件
   productionSourceMap: false,
   // 关闭ESLINT校验工具
   lintOnSave: false,

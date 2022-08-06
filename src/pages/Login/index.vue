@@ -89,7 +89,7 @@ export default {
         phone && password && (await this.$store.dispatch('userLogin', { phone, password }))
         // alert(123)
         // 登录的路由组件：看路由当中是否包含query参数，有：跳转query指定路由，没有跳转home
-        let toPath = this.$route.query.redirect || '/home';
+        let toPath = this.$route.query.redirect || '/';
         (phone && password) && this.$router.push(toPath);
         // 下面if语句判断也可
         // if (this.$route.query.redirect) {
@@ -101,26 +101,24 @@ export default {
         alert('账号或密码错误，请重新登录');
       }
       /* --------------下面也可以实现------------------ */
-      /*  async userLogin () { 
-          let { phone, password } = this;
-        if (phone && password) {
-          try {
-            const result = await this.$store.dispatch('userLogin', {
-              phone,
-              password,
-            });
-            if (result === 'ok') {
-              // alert('登录成功');
-              let redirect = this.$route.query.redirect;
-              this.$router.push(redirect || '/');
-            } else {
-              alert('登录失败');
-            }
-          } catch (error) {
-            alert('账号或密码错误，请重新登录');
+      /* let { phone, password } = this;
+      if (phone && password) {
+        try {
+          const result = await this.$store.dispatch('userLogin', {
+            phone,
+            password,
+          });
+          if (result === 'ok') {
+            // alert('登录成功');
+            let redirect = this.$route.query.redirect;
+            this.$router.push(redirect || '/');
+          } else {
+            alert('登录失败');
           }
+        } catch (error) {
+          alert('账号或密码错误，请重新登录');
         }
-      }*/
+      } */
     },
   }
 }

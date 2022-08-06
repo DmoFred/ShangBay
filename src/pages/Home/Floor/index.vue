@@ -8,7 +8,6 @@
             <li class="active" v-for="(nav, index) in list.navList" :key="index">
               <a href="#tab1" data-toggle="tab">{{ nav.text }}</a>
             </li>
-
           </ul>
         </div>
       </div>
@@ -96,22 +95,22 @@ export default {
             line-height: 18px;
             margin-bottom: 5px;
 
-
             a {
               padding-top: 1px;
               font-weight: 400;
               background-color: #fff;
 
               &::after {
-                content: "|";
+                content: '|';
                 padding: 0 10px;
+                color: #e1251b !important;
               }
             }
 
             &:nth-child(7) {
               a {
                 &::after {
-                  content: "";
+                  content: '';
                 }
               }
             }
@@ -119,6 +118,9 @@ export default {
             &.active {
               a {
                 color: #e1251b;
+                &:hover {
+                  color: #2e5ff1 !important;
+                }
               }
             }
           }
